@@ -17,6 +17,8 @@ dependencies {
     // slf4j
     implementation 'org.slf4j:slf4j-api:1.7.32'
     implementation 'org.slf4j:slf4j-simple:1.7.32'
+    // Jackson ObjectMapper
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0-rc1'
 
     // jUnit
     testImplementation platform('org.junit:junit-bom:5.9.1')
