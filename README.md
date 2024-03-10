@@ -177,7 +177,7 @@ Some of the main features of Project Loom are:
 - **Structured concurrency**: A new way of organizing concurrent code, where virtual threads are grouped into logical scopes that define their lifetime and dependencies. For example, `Thread.ofVirtual().start(task)` creates a virtual thread that is attached to the current scope, and will be automatically terminated when the scope ends. Structured concurrency helps to avoid common pitfalls, such as orphaned threads, resource leaks, or inconsistent state.
 - **Continuation** class: A low-level abstraction that represents the state of a suspended computation. A continuation can be created, run, and yielded programmatically, allowing for finer control over the execution flow. For example, `Continuation.runWithContinuationScope(() -> task())` runs the given task in a new continuation scope, and returns a Continuation object that can be resumed later.
 - **Tail-call elimination**: An optimization technique that prevents stack overflow errors when using recursive methods. Project Loom implements tail-call elimination for both regular and virtual threads, by reusing the same stack frame for the last call in a method. For example, `return factorial(n-1, n*acc)` is a tail call that does not consume additional stack space.
-#### Using virtual threads in Spring
+#### 🍃 Using virtual threads in Spring 
 To turn on virtual threads in Spring, you need to have JDK 21 and Spring Boot 3.2 or higher. You also need to add the following property to your application.properties file:
 `spring.threads.virtual.enabled=true`
 This will enable virtual threads for your application, and Spring Boot will automatically switch to virtual threads for its concurrency utilities. 
