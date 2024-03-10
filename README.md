@@ -95,7 +95,14 @@ When it comes to creating data classes in Java, both Java Records and Lombok off
 * Well-suited for small, straightforward use-cases.
 #### Example:
 ```java
-
+public record DeckOfCardsRecord(
+    int numberOfCards,
+    boolean hasLogo,
+    String brand,
+    String color,
+    boolean hasBox,
+    int amountOfJokers
+) { }
 ```
 ### Lombok
 #### Use Case:
@@ -109,5 +116,29 @@ When it comes to creating data classes in Java, both Java Records and Lombok off
 * `@Data`: Combines `@Getter`, `@Setter`, `@EqualsAndHashCode`, and `@ToString`.
 #### Example:
 ```java
+@Value
+@Builder
+public class DeckOfCardsValue {
+  int numberOfCards;
+  boolean hasLogo;
+  String brand;
+  String color;
+  boolean hasBox;
+  int amountOfJokers;
+}
+```
 
+### 👥JEP 394: Pattern Matching ...for instanceof
+Pattern matching for instanceof is a Java 17 feature that allows you to test and assign an object to a variable of a specific type in one step. This feature simplifies the code and makes it more readable and robust. For example, instead of writing:
+```java
+if (obj instanceof String) {
+String s = (String) obj;
+// use s
+}
+```
+You can write:
+```java
+if (obj instanceof String s) {
+// use s
+}
 ```
