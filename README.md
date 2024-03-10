@@ -131,14 +131,40 @@ public class DeckOfCardsValue {
 ### 👥JEP 394: Pattern Matching ...for instanceof
 Pattern matching for instanceof is a Java 17 feature that allows you to test and assign an object to a variable of a specific type in one step. This feature simplifies the code and makes it more readable and robust. For example, instead of writing:
 ```java
-if (obj instanceof String) {
-String s = (String) obj;
-// use s
+if (obj instanceof DeckOfCardsValue) {
+  DeckOfCardsValue deckOfCardsValue = (DeckOfCardsValue) obj;
+  assertEquals(36, deckOfCardsValue.getNumberOfCards());
 }
 ```
 You can write:
 ```java
-if (obj instanceof String s) {
-// use s
+if (obj instanceof DeckOfCardsValue deckOfCardsValue) {
+  assertEquals(36, deckOfCardsValue.getNumberOfCards());
 }
 ```
+#### Branch
+`git checkout java17/pattern-matching`
+#### Links
+JEP 394: https://openjdk.org/jeps/394
+
+### 👩‍👧‍👦JEP 409: Sealed classes… or final with exceptions
+Sealed classes are a Java 17 feature that allows you to restrict which classes or interfaces can extend or implement a class or an interface. This feature enables more fine-grained inheritance control and supports future directions in pattern matching. For example, you can use sealed classes to model a fixed set of kinds of values in a domain, such as shapes or celestial objects.
+To declare a sealed class or interface, you need to use the sealed modifier and specify the permitted subclasses or subinterfaces in the permits clause. For example:
+```java
+@Getter
+@RequiredArgsConstructor
+public abstract sealed class Card permits PlayingCard, UnoCard {
+  private final String rank;
+  public abstract String getDescription();
+}
+```
+This means that only `PlayingCard` and `UnoCard` can extend `Card`. The permitted subclasses or subinterfaces must be declared in the same module or package as the sealed class or interface, and they must have one of the following modifiers:
+* `final`: The class or interface cannot have any further subclasses or subinterfaces.
+* `sealed`: The class or interface can have a restricted set of subclasses or subinterfaces, specified by its own permits clause.
+* `non-sealed`: The class or interface can have any subclasses or subinterfaces, without any restrictions.
+#### Branch
+`git checkout java17/sealed`
+#### Links
+JEP 409: https://openjdk.org/jeps/409
+
+
