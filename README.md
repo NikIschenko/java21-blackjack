@@ -167,4 +167,22 @@ This means that only `PlayingCard` and `UnoCard` can extend `Card`. The permitte
 #### Links
 JEP 409: https://openjdk.org/jeps/409
 
-
+### 🧵JEP 444 (Release): Virtual threads
+Project Loom is an experimental feature of the Java platform that aims to improve the scalability and performance of concurrent applications. 
+It introduces a new concept of **virtual threads**, also known as **fibers**, that are lightweight and managed by the JVM, rather than the operating system. 
+Virtual threads can be created and suspended in large numbers, without consuming much memory or CPU resources. They also support blocking operations, such as I/O or synchronization, without blocking the underlying OS thread. This allows for a simpler and more expressive programming model, where concurrency can be achieved with plain Java code, rather than complex frameworks or libraries.
+## Features
+Some of the main features of Project Loom are:
+- **VirtualThread** class: A new subclass of Thread that represents a virtual thread. It has the same API as the regular Thread class, but it can be created and started with much lower overhead. For example, `Thread.startVirtualThread(() -> task())` creates and runs a virtual thread that executes the given task.
+- **Structured concurrency**: A new way of organizing concurrent code, where virtual threads are grouped into logical scopes that define their lifetime and dependencies. For example, `Thread.ofVirtual().start(task)` creates a virtual thread that is attached to the current scope, and will be automatically terminated when the scope ends. Structured concurrency helps to avoid common pitfalls, such as orphaned threads, resource leaks, or inconsistent state.
+- **Continuation** class: A low-level abstraction that represents the state of a suspended computation. A continuation can be created, run, and yielded programmatically, allowing for finer control over the execution flow. For example, `Continuation.runWithContinuationScope(() -> task())` runs the given task in a new continuation scope, and returns a Continuation object that can be resumed later.
+- **Tail-call elimination**: An optimization technique that prevents stack overflow errors when using recursive methods. Project Loom implements tail-call elimination for both regular and virtual threads, by reusing the same stack frame for the last call in a method. For example, `return factorial(n-1, n*acc)` is a tail call that does not consume additional stack space.
+#### Using virtual threads in Spring
+To turn on virtual threads in Spring, you need to have JDK 21 and Spring Boot 3.2 or higher. You also need to add the following property to your application.properties file:
+`spring.threads.virtual.enabled=true`
+This will enable virtual threads for your application, and Spring Boot will automatically switch to virtual threads for its concurrency utilities. 
+Virtual threads are a preview feature of Java 19 that allow you to write scalable and performant concurrent applications with less complexity and overhead
+#### Branch
+`git checkout java21/loom`
+#### Links
+JEP 444: https://openjdk.org/jeps/444
