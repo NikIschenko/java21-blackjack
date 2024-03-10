@@ -79,3 +79,35 @@ The Pattern Matching for switch feature, introduced in Java SE 17, enhances the 
 `git checkout java17/switch`
 #### Links
 JEP 406: https://openjdk.org/jeps/406
+
+### 📹 JEP 395: Record vs Lombok 🪄
+When it comes to creating data classes in Java, both Java Records and Lombok offer solutions to reduce boilerplate code. However, they serve different purposes and have distinct features. Let’s explore their differences:
+
+#### Java Records
+##### Use Case
+* Best suited for simple data transport objects, especially where immutability is desired.
+* Designed as transparent carriers for immutable data.
+* Ideal for scenarios where you need concise, read-only data structures.
+##### Features
+* Automatically generates essential methods like equals, hashCode, and toString.
+* Concise syntax for defining data fields.
+* Immutable by default.
+* Well-suited for small, straightforward use-cases.
+#### Example:
+```java
+
+```
+### Lombok
+#### Use Case:
+* More flexible, suitable for both mutable and immutable classes.
+* Offers a wider range of features beyond what records provide.
+* Allows customization of getter names, access levels, and return types.
+#### Features:
+* `@Value`: Creates immutable objects with minimal boilerplate.
+* `@Getter`, `@Setter`: Customizable getter and setter methods.
+* `@Builder`: Simplifies object creation with a fluent builder pattern.
+* `@Data`: Combines `@Getter`, `@Setter`, `@EqualsAndHashCode`, and `@ToString`.
+#### Example:
+```java
+
+```
