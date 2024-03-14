@@ -188,18 +188,14 @@ Virtual threads are a preview feature of Java 19 that allow you to write scalabl
 JEP 444: https://openjdk.org/jeps/444
 
 ### 📹👥 JEP 440: Record Patterns
-
 #### Overview
 JEP 440 introduces record patterns to the Java programming language, enhancing its data manipulation capabilities. This feature allows for the deconstruction of record values, facilitating more declarative and composable data navigation and processing.
-
 #### Features
 - **Deconstruction of Record Values**: Record patterns enable the decomposition of records into their constituent components.
 - **Pattern Matching Enhancements**: Works in conjunction with `instanceof` and `switch` pattern matching, including support for guards.
 - **Nested Patterns**: Allows for nested deconstruction, which is particularly useful with sealed record hierarchies.
-
 ## Motivation
 The motivation behind JEP 440 is to extend pattern matching to destruct instances of record classes, enabling sophisticated data queries and more composable data queries.
-
 ## Example Usage
 ```java
 record Card(String suit, int value) {}
@@ -218,3 +214,7 @@ if (playerHand instanceof PlayerHand(Card c1, Card c2)) {
     }
 }
 ```
+#### Branch
+`git checkout java21/record-patterns`
+#### Links
+JEP 440: https://openjdk.org/jeps/440
