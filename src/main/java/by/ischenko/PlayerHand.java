@@ -1,3 +1,3 @@
 package by.ischenko;
 
-record PlayerHand(Object firstCard, Object secondCard) {}
+record PlayerHand(Card firstCard, Card secondCard) {}
