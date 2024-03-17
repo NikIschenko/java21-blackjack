@@ -236,7 +236,26 @@ JEP 440: https://openjdk.org/jeps/440
 #### Example: Calculating card value
 - Consider the following code that calculates blackjack card's value:
   ```java
-
+  public sealed interface Card permits UnoCard, PlayingCard {
+    String getRank();
+  }
+  
+  public record CardPair<T extends Card>(T first, T second) { }
+  
+  private static int cardValue(Card card) {
+    return switch (card) {
+      case UnoCard unoCard when isInteger(unoCard.getRank()) -> parseInt(unoCard.getRank());
+      case UnoCard unoCard when !isInteger(unoCard.getRank()) ->
+          10; // face cards are worth 10 points
+      case PlayingCard playingCard when isInteger(playingCard.getRank()) ->
+          parseInt(playingCard.getRank());
+      case PlayingCard playingCard when "Ace".equals(playingCard.getRank()) -> 1;
+      case PlayingCard playingCard when Set.of("Jack", "Queen", "King")
+          .contains(playingCard.getRank()) -> 10;
+      case null -> 0;
+      default -> throw new IllegalArgumentException("Unknown card type: " + card);
+    };
+  }
   ```
     - In this example, we use a **pattern switch expression** to handle different card types.
     - The code is more concise and expressive compared to the traditional switch statement.
@@ -245,8 +264,22 @@ JEP 440: https://openjdk.org/jeps/440
  - Record patterns also became a final feature in Java 21 and are supported in switch.
  - For instance:
    ```java
+    public static int pointsInPair(CardPair<Card> cardPair) {
+    return switch (cardPair) {
+      case CardPair<Card>(PlayingCard f, PlayingCard s) -> {
+        System.out.println("Playing cards! First one: " + f + " Second one: " + s);
+        yield cardValue(f) + cardValue(s);
+      }
+      case CardPair<Card>(UnoCard f, UnoCard s) -> {
+        System.out.println("Uno cards! First one: " + f + " Second one: " + s);
+        yield cardValue(f) + cardValue(s);
+      }
+      default -> throw new IllegalArgumentException("Unknown card type: " + cardPair);
+    };
+   }
    ```
 #### Branch
 `git checkout java21/switch-patterns`
 #### Links
 JEP 441: https://openjdk.org/jeps/441
+
