@@ -299,7 +299,7 @@ JEP 431 simplifies working with collections that have an encounter order, making
 
 ```
 #### Branch
-`git checkout java21/switch-patterns`
+`git checkout java21/sequenced-collections`
 #### Links
 JEP 431: https://openjdk.org/jeps/431
 
