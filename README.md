@@ -232,7 +232,6 @@ JEP 440: https://openjdk.org/jeps/440
     - The selector expression can be **any reference type or an int type** (excluding long, float, double, or boolean).
     - Case labels can now have **patterns**, offering more flexibility.
     - We can test whether the selector expression matches a pattern, rather than being exactly equal to a constant.
-
 #### Example: Calculating card value
 - Consider the following code that calculates blackjack card's value:
   ```java
@@ -259,7 +258,6 @@ JEP 440: https://openjdk.org/jeps/440
   ```
     - In this example, we use a **pattern switch expression** to handle different card types.
     - The code is more concise and expressive compared to the traditional switch statement.
-
 #### Record Patterns
  - Record patterns also became a final feature in Java 21 and are supported in switch.
  - For instance:
@@ -282,4 +280,27 @@ JEP 440: https://openjdk.org/jeps/440
 `git checkout java21/switch-patterns`
 #### Links
 JEP 441: https://openjdk.org/jeps/441
+
+### 📶 JEP 431: Sequenced Collections
+**JEP 431** introduces new interfaces to the Java Collections Framework to represent collections with a defined encounter order. 
+This enhancement addresses the lack of a unified collection type that represents a sequence of elements and provides uniform APIs for accessing elements in both forward and reverse order.
+![SequencedCollection](.readmd/SequencedCollection.png)![SequencedMap](.readmd/SequencedMap.png)
+#### Key Features:
+- **SequencedCollection Interface**: A collection with a well-defined first, second, and subsequent elements, supporting operations at either end.
+- **Reversed Views**: The `reversed()` method offers a reverse-ordered view, allowing for processing elements from last to first.
+- **Enhanced Set and Map Interfaces**: `SequencedSet` and `SequencedMap` interfaces extend the standard `Set` and `Map` with sequenced behavior.
+- **Retrofitting**: Existing classes like `List`, `Deque`, `LinkedHashSet`, `SortedSet`, `LinkedHashMap`, and `SortedMap` are retrofitted to implement these new interfaces.
+#### Motivation:
+The motivation behind JEP 431 is to fill the gaps in Java’s collections framework where a collection type representing a sequence of elements with a defined encounter order was missing]. 
+This led to inconsistencies and limitations in expressing certain concepts and performing operations related to encounter order.
+#### Impact:
+JEP 431 simplifies working with collections that have an encounter order, making it easier to write clear and efficient code when dealing with sequences of elements.
+```java
+
+```
+#### Branch
+`git checkout java21/switch-patterns`
+#### Links
+JEP 431: https://openjdk.org/jeps/431
+
 
