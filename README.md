@@ -295,8 +295,20 @@ The motivation behind JEP 431 is to fill the gaps in Java’s collections framew
 This led to inconsistencies and limitations in expressing certain concepts and performing operations related to encounter order.
 #### Impact:
 JEP 431 simplifies working with collections that have an encounter order, making it easier to write clear and efficient code when dealing with sequences of elements.
-```java
 
+Before:
+```java
+PlayingCard firstCardList = listCollection.get(0);
+PlayingCard firstCardDeque = dequeCollection.getFirst();
+PlayingCard firstCardSortedSet = sortedSetCollection.first();
+PlayingCard firstCardLinkedHashSet = linkedHashSetCollection.iterator().next();
+```
+After:
+```java
+PlayingCard firstCardList = listCollection.getFirst();
+PlayingCard firstCardDeque = dequeCollection.getFirst();
+PlayingCard firstCardSortedSet = sortedSetCollection.getFirst();
+PlayingCard firstCardLinkedHashSet = linkedHashSetCollection.getFirst;
 ```
 #### Branch
 `git checkout java21/sequenced-collections`
