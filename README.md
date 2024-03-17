@@ -198,23 +198,55 @@ JEP 440 introduces record patterns to the Java programming language, enhancing i
 The motivation behind JEP 440 is to extend pattern matching to destruct instances of record classes, enabling sophisticated data queries and more composable data queries.
 ## Example Usage
 ```java
-record Card(String suit, int value) {}
-record PlayerHand(Card firstCard, Card secondCard) {}
-Card card1 = new Card("Hearts", 10);
-Card card2 = new Card("Spades", 8);
+void recordPatternsJava21Test() {
+  Card card1 = new PlayingCard("Jack", "Hearts");
+  Card card2 = new PlayingCard("Ace", "Spades");
 
-PlayerHand playerHand = new PlayerHand(card1, card2);
-if (playerHand instanceof PlayerHand(Card c1, Card c2)) {
+  Object playerHand = new PlayerHand(card1, card2);
+  if (playerHand instanceof PlayerHand(PlayingCard c1, PlayingCard c2)) {
     System.out.println("First card: " + c1);
     System.out.println("Second card: " + c2);
-    if (c1.value() + c2.value() == 21) {
-        System.out.println("Blackjack!");
+    if (getValue(c1) + getValue(c2) == 21) {
+      System.out.println("Blackjack!");
     } else {
-        System.out.println("Total hand value: " + (c1.value() + c2.value()));
+      System.out.println("Total hand value: " + (getValue(c1) + getValue(c2)));
     }
+  }
 }
 ```
 #### Branch
 `git checkout java21/record-patterns`
 #### Links
 JEP 440: https://openjdk.org/jeps/440
+
+### ⚕️JEP 441: Pattern Matching for Switch
+#### Overview
+**Pattern Matching for Switch** is a significant enhancement introduced in **Java 21**. It revolutionizes the way we handle switch statements, making code selection more straightforward and expressive. Here's what you need to know:
+- Pattern Matching for Switch allows us to use **patterns in case labels** within switch statements.
+- It improves code readability, reduces redundancy, and simplifies complex switch blocks.
+#### Features
+- In earlier Java releases, the selector expression in a switch statement had limitations:
+    - It had to evaluate to a number, string, or enum constant.
+    - Case labels had to be constants.
+- With this new feature:
+    - The selector expression can be **any reference type or an int type** (excluding long, float, double, or boolean).
+    - Case labels can now have **patterns**, offering more flexibility.
+    - We can test whether the selector expression matches a pattern, rather than being exactly equal to a constant.
+
+#### Example: Calculating card value
+- Consider the following code that calculates blackjack card's value:
+  ```java
+
+  ```
+    - In this example, we use a **pattern switch expression** to handle different card types.
+    - The code is more concise and expressive compared to the traditional switch statement.
+
+#### Record Patterns
+    - Record patterns also became a final feature in Java 21 and are supported in switch.
+    - For instance:
+      ```java
+      ```
+#### Branch
+`git checkout java21/switch-patterns`
+#### Links
+JEP 441: https://openjdk.org/jeps/441
