@@ -242,10 +242,10 @@ JEP 440: https://openjdk.org/jeps/440
     - The code is more concise and expressive compared to the traditional switch statement.
 
 #### Record Patterns
-    - Record patterns also became a final feature in Java 21 and are supported in switch.
-    - For instance:
-      ```java
-      ```
+ - Record patterns also became a final feature in Java 21 and are supported in switch.
+ - For instance:
+   ```java
+   ```
 #### Branch
 `git checkout java21/switch-patterns`
 #### Links
