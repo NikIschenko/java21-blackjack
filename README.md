@@ -316,3 +316,20 @@ PlayingCard firstCardLinkedHashSet = linkedHashSetCollection.getFirst;
 JEP 431: https://openjdk.org/jeps/431
 
 
+### 🧹 JEP 439: Generational ZGC
+#### Overview
+JEP 439 introduces a significant enhancement to the Z Garbage Collector (ZGC) by implementing a generational approach for garbage collection in Java. 
+This improvement aims to optimize performance by segregating young and old objects into separate generations.
+#### Key Features
+- **Generational Collection**: Separates heap memory into young and old generations for more efficient garbage collection.
+- **Performance Optimization**: Targets the "infant mortality" hypothesis, collecting young objects more frequently to improve application performance.
+- **Scalability**: Ensures short pause times that do not increase with the size of the heap, making it suitable for server applications with large heaps.
+#### Benefits
+- **Improved Throughput**: Frequent collection of young objects leads to better memory management and application throughput.
+- **Reduced Pause Times**: Maintains minimal pause times during garbage collection, enhancing the responsiveness of applications.
+- **Server-Ready**: Ideal for server environments where consistent and fast response times are crucial.
+#### Usage
+To enable Generational ZGC, use the following JVM flags:
+```shell
+-XX:+UseZGC -XX:+ZGenerational
+
