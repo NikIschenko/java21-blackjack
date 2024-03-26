@@ -315,7 +315,6 @@ PlayingCard firstCardLinkedHashSet = linkedHashSetCollection.getFirst;
 #### Links
 JEP 431: https://openjdk.org/jeps/431
 
-
 ### 🧹 JEP 439: Generational ZGC
 #### Overview
 JEP 439 introduces a significant enhancement to the Z Garbage Collector (ZGC) by implementing a generational approach for garbage collection in Java. 
@@ -332,4 +331,17 @@ This improvement aims to optimize performance by segregating young and old objec
 To enable Generational ZGC, use the following JVM flags:
 ```shell
 -XX:+UseZGC -XX:+ZGenerational
+```
 
+### 🥯 Other changes
+#### New Collections Methods
+- **newSequencedSetFromMap**: This method creates a sequenced set from an existing map. It ensures that the order of elements in the set corresponds to the order in which they appear in the map.
+  
+  E.g.: Imagine we’re building a Blackjack game, and we want to keep track of the cards dealt. We can use a map to represent the deck, where the keys are card names (e.g., “Ace of Spades,” “King of Hearts”) and the values are their corresponding point values.
+  Here’s how we can create a sequenced set of dealt cards from our map
+```java
+
+```
+- **unmodifiableSequencedCollection**
+#### Branch
+`git checkout java21/other-changes`
