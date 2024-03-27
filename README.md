@@ -1,5 +1,5 @@
 # Java's Blackjack and 21 on hand
-![img.png](.readmd/header.png)
+![header](.readmd/header.png)
 
 *This repository contains examples of the important new features introduced in between Java 17 and Java 21.
 Let's explore these features and how to switch between them using Git branches.*
@@ -39,7 +39,8 @@ String cards = """
 #### Escaping:
 * Inside text blocks, double-quotes don’t need to be escaped.
 * You can even use three double-quotes within a text block by escaping one of them.
-* Text blocks are particularly useful for writing multi-line strings such as HTML, JSON, SQL queries, or any other structured text. They improve code readability and eliminate the need for manual line breaks and concatenation. 🌟📝
+* Text blocks are particularly useful for writing multi-line strings such as HTML, JSON, SQL queries, or any other structured text. 
+  They improve code readability and eliminate the need for manual line breaks and concatenation.
 #### Branch
 `git checkout java17/text-blocks`
 #### Links
@@ -198,7 +199,6 @@ JEP 440 introduces record patterns to the Java programming language, enhancing i
 The motivation behind JEP 440 is to extend pattern matching to destruct instances of record classes, enabling sophisticated data queries and more composable data queries.
 ## Example Usage
 ```java
-void recordPatternsJava21Test() {
   Card card1 = new PlayingCard("Jack", "Hearts");
   Card card2 = new PlayingCard("Ace", "Spades");
 
@@ -212,7 +212,6 @@ void recordPatternsJava21Test() {
       System.out.println("Total hand value: " + (getValue(c1) + getValue(c2)));
     }
   }
-}
 ```
 #### Branch
 `git checkout java21/record-patterns`
@@ -333,15 +332,81 @@ To enable Generational ZGC, use the following JVM flags:
 -XX:+UseZGC -XX:+ZGenerational
 ```
 
-### 🥯 Other changes
-#### New Collections Methods
-- **newSequencedSetFromMap**: This method creates a sequenced set from an existing map. It ensures that the order of elements in the set corresponds to the order in which they appear in the map.
+### 🥯 New Methods
+#### Collections
+- **newSequencedSetFromMap(SequencedMap map)**: This method creates a sequenced set from an existing map. It ensures that the order of elements in the set corresponds to the order in which they appear in the map.
   
   E.g.: Imagine we’re building a Blackjack game, and we want to keep track of the cards dealt. We can use a map to represent the deck, where the keys are card names (e.g., “Ace of Spades,” “King of Hearts”) and the values are their corresponding point values.
   Here’s how we can create a sequenced set of dealt cards from our map
+  ```java
+  SequencedSet<String> sequencedPlayerCardsSet = Collections.newSequencedSetFromMap(
+      new LinkedHashMap<>() {
+        protected boolean removeEldestEntry(Map.Entry<String, Boolean> e) {
+          return this.size() > 5;
+        }
+      });
+  
+  IntStream.range(0, 16)
+      .mapToObj(i -> "Card" + i)
+      .forEach(sequencedPlayerCardsSet::add);
+  
+  assertEquals(5, sequencedPlayerCardsSet.size());
+  assertEquals("Card11", sequencedPlayerCardsSet.getFirst());
+  assertEquals("Card15", sequencedPlayerCardsSet.getLast());
+  ```
+- **unmodifiableSequencedCollection(SequencedCollection c) || unmodifiableSequencedMap(SequencedMap m) || unmodifiableSequencedSet(SequencedSet s)**: returns an unmodifiable view of the underlying SequencedCollection
+  ```java
+  List<String> deck = new ArrayList<>();
+  deck.add("Card1");
+  deck.add("Card2");
+  deck.add("Card3");
+  SequencedCollection<String> immutableDeck = Collections.unmodifiableSequencedCollection(deck);
+  
+  assertThrows(UnsupportedOperationException.class, () -> immutableDeck.addFirst("Card777"));
+  ```
+#### String
 ```java
-
+String BLACKJACK = """
+    Blackjack, also known as 21, is an immensely popular card game played worldwide,
+    where players aim to achieve a hand value as close to 21 as possible""";
 ```
-- **unmodifiableSequencedCollection**
+- **indexOf(String str, int beginIndex, int endIndex)**: This method returns the index within this string of the first occurrence of the specified substring, starting at the specified index and ending at the specified index.
+  ```java
+  int positionOf21 = BLACKJACK.indexOf("21", 30, BLACKJACK.length());
+  assertEquals(135, positionOf21);
+  ```
+- **splitWithDelimiters(String regex, int limit)**: This method splits the string using the specified regular expression and limits the number of resulting substrings with keeping delimiters as a part of array.
+  ```java
+    String[] partsWithDelimiters = BLACKJACK.splitWithDelimiters(",", 3);
+    assertEquals(5, partsWithDelimiters.length);
+    Arrays.stream(partsWithDelimiters).forEach(System.out::println);
+  ```
+#### StringBuilder
+- **repeat(CharSequence cs, int count) || repeat(int codePoint, int count)**: This method appends the specified CharSequence to the StringBuilder multiple times.
+  ```java
+  String repeated = new StringBuilder("♠️♣️♥️♦️")
+    .repeat("Blackjack, ", 3)
+    .append("♠️♣️♥️♦️")
+    .toString();
+  assertEquals("♠️♣️♥️♦️Blackjack, Blackjack, Blackjack, ♠️♣️♥️♦️", repeated);
+  ```
+#### Character  
+- **isEmojiTest(int codePoint)**: This method returns true if the specified code point is an emoji character.
+  ```java
+    assertTrue(Character.isEmoji("♠️".codePointAt(0)));
+    assertFalse(Character.isEmoji("B".codePointAt(0)));
+  ```
+#### Math
+- **clamp(long value, int min, int max) ||** _and a lot of different variants of overloading_: This method returns the value if it is within the specified range; otherwise, it returns the minimum or maximum value.
+  ```java
+    int min = 10;
+    int max = 20;
+    assertEquals(10, Math.clamp(5,  min, max));
+    assertEquals(10, Math.clamp(10, min, max));
+    assertEquals(15, Math.clamp(15, min, max));
+    assertEquals(20, Math.clamp(25, min, max));
+  ```
 #### Branch
-`git checkout java21/other-changes`
+```shell
+git checkout java21/new-methods
+```
