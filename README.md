@@ -42,7 +42,9 @@ String cards = """
 * Text blocks are particularly useful for writing multi-line strings such as HTML, JSON, SQL queries, or any other structured text. 
   They improve code readability and eliminate the need for manual line breaks and concatenation.
 #### Branch
-`git checkout java17/text-blocks`
+```shell
+git checkout java17/text-blocks
+```
 #### Links
 JEP 378: https://openjdk.org/jeps/378
 
@@ -77,7 +79,9 @@ The Pattern Matching for switch feature, introduced in Java SE 17, enhances the 
   }
 ```
 #### Branch
-`git checkout java17/switch`
+```shell
+git checkout java17/switch
+```
 #### Links
 JEP 406: https://openjdk.org/jeps/406
 
@@ -144,7 +148,9 @@ if (obj instanceof DeckOfCardsValue deckOfCardsValue) {
 }
 ```
 #### Branch
-`git checkout java17/pattern-matching`
+```shell
+git checkout java17/pattern-matching
+```
 #### Links
 JEP 394: https://openjdk.org/jeps/394
 
@@ -164,7 +170,9 @@ This means that only `PlayingCard` and `UnoCard` can extend `Card`. The permitte
 * `sealed`: The class or interface can have a restricted set of subclasses or subinterfaces, specified by its own permits clause.
 * `non-sealed`: The class or interface can have any subclasses or subinterfaces, without any restrictions.
 #### Branch
-`git checkout java17/sealed`
+```shell
+git checkout java17/sealed
+```
 #### Links
 JEP 409: https://openjdk.org/jeps/409
 
@@ -184,7 +192,9 @@ To turn on virtual threads in Spring, you need to have JDK 21 and Spring Boot 3.
 This will enable virtual threads for your application, and Spring Boot will automatically switch to virtual threads for its concurrency utilities. 
 Virtual threads are a preview feature of Java 19 that allow you to write scalable and performant concurrent applications with less complexity and overhead
 #### Branch
-`git checkout java21/loom`
+```shell
+git checkout java21/loom
+```
 #### Links
 JEP 444: https://openjdk.org/jeps/444
 
@@ -214,7 +224,9 @@ The motivation behind JEP 440 is to extend pattern matching to destruct instance
   }
 ```
 #### Branch
-`git checkout java21/record-patterns`
+```shell
+git checkout java21/record-patterns
+```
 #### Links
 JEP 440: https://openjdk.org/jeps/440
 
@@ -276,7 +288,9 @@ JEP 440: https://openjdk.org/jeps/440
    }
    ```
 #### Branch
-`git checkout java21/switch-patterns`
+```shell
+git checkout java21/switch-patterns
+```
 #### Links
 JEP 441: https://openjdk.org/jeps/441
 
@@ -310,7 +324,9 @@ PlayingCard firstCardSortedSet = sortedSetCollection.getFirst();
 PlayingCard firstCardLinkedHashSet = linkedHashSetCollection.getFirst;
 ```
 #### Branch
-`git checkout java21/sequenced-collections`
+```shell
+git checkout java21/sequenced-collections
+```
 #### Links
 JEP 431: https://openjdk.org/jeps/431
 
