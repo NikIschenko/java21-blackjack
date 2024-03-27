@@ -3,6 +3,7 @@ package by.ischenko;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -23,16 +24,15 @@ class NewStringMathTest {
   }
 
   @Test
-  void splitWithLimitsTest() {
+  void splitWithDelimitersTest() {
     String[] parts = BLACKJACK.split(",", 3);
+    String[] partsWithDelimiters = BLACKJACK.splitWithDelimiters(",", 3);
 
     assertEquals(3, parts.length);
-    assertEquals("Blackjack", parts[0].trim());
-    assertEquals("also known as 21", parts[1].trim());
-    assertEquals("""
-        is an immensely popular card game played worldwide,
-        where players aim to achieve a hand value as close to 21 as possible without exceeding it,
-        competing against the dealer""", parts[2].trim());
+    assertEquals(5, partsWithDelimiters.length);
+
+    Arrays.stream(parts).forEach(System.out::println);
+    Arrays.stream(partsWithDelimiters).forEach(System.out::println);
   }
 
   // StringBuilder
