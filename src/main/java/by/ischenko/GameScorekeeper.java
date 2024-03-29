@@ -25,9 +25,15 @@ public class GameScorekeeper {
         System.out.println("Uno cards! First one: " + f + " Second one: " + s);
         yield cardValue(f) + cardValue(s);
       }
+      // Only for hipsters!!! // TODO: specially for hipster Aleh
+      case CardPair<Card>(PlayingCard f, UnoCard s) -> {
+        System.out.println("Mixed cards! First one: " + f + " Second one: " + s);
+        yield cardValue(f) + cardValue(s);
+      }
       default -> throw new IllegalArgumentException("Unknown card type: " + cardPair);
     };
   }
+
 
   private static int cardValue(Card card) {
     return switch (card) {
