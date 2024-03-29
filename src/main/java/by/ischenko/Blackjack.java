@@ -39,14 +39,14 @@ public class Blackjack {
     printResult(playerBusted, dealerBusted, playerTotal, dealerTotal);
   }
 
-  private Queue<Card> prepareDeck() throws InterruptedException {
+  private Queue<Card> prepareDeck() {
     List<Card> deck = new ArrayList<>();
     IntStream.range(0, 52).mapToObj(j -> new Card(j % 13, getCardValue(j))).forEach(deck::add);
     Collections.shuffle(deck);
     return new LinkedList<>(deck);
   }
 
-  private int drawCard(Queue<Card> queue) throws InterruptedException {
+  private int drawCard(Queue<Card> queue) {
     return queue.poll().value();
   }
 

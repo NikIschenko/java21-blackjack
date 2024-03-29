@@ -24,7 +24,7 @@ class BlackjackTest {
 
   @Test
   void fixedThreadPoolTest() {
-    try (var executor = Executors.newFixedThreadPool(AMOUNT_OF_THREADS)) {
+    try (var executor = Executors.newFixedThreadPool(6)) {
       IntStream.range(0, AMOUNT_OF_THREADS)
           .forEach(i -> executor.submit(() -> {
             new Blackjack().playGame();
