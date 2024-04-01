@@ -132,6 +132,10 @@ public class DeckOfCardsValue {
   int amountOfJokers;
 }
 ```
+#### Branch
+```shell
+git checkout java17/records
+```
 
 ### 👥JEP 394: Pattern Matching ...for instanceof
 Pattern matching for instanceof is a Java 17 feature that allows you to test and assign an object to a variable of a specific type in one step. This feature simplifies the code and makes it more readable and robust. For example, instead of writing:
